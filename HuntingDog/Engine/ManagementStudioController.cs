@@ -195,7 +195,10 @@ namespace DatabaseObjectSearcher
 		}
 
 		private static UIConnectionInfo CreateFrom(SqlConnectionInfo connInfo)
-		{
+        {
+            System.Diagnostics.Debugger.Launch();
+            System.Diagnostics.Debugger.Break();
+
 			var ci = new UIConnectionInfo();
 			ci.ServerName = connInfo.ServerName;
 			ci.ServerType = new Guid("8c91a03d-f9b4-46c0-a305-b5dcc79ff907");
@@ -204,9 +207,9 @@ namespace DatabaseObjectSearcher
 			ci.PersistPassword = true;
 			ci.ApplicationName = "Microsoft SQL Server Management Studio - Query";
 
-			ci.AuthenticationType = !connInfo.UseIntegratedSecurity
-				? 1
-				: 0;
+            ci.AuthenticationType = (int) (connInfo.UseIntegratedSecurity
+                ? SqlConnectionInfo.AuthenticationMethod.NotSpecified
+                : connInfo.Authentication);
 
 			return ci;
 		}

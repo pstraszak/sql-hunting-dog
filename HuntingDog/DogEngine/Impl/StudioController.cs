@@ -370,6 +370,8 @@ namespace HuntingDog.DogEngine.Impl
         {
             this.SafeRun(() =>
             {
+                System.Diagnostics.Debugger.Launch();
+                System.Diagnostics.Debugger.Break();
                 var serverInfo = GetServer(server);
                 serverInfo.Connection.DatabaseName = entityObject.DatabaseName;
                 ManagementStudioController.OpenStoredProcedureForModification(entityObject.InternalObject as StoredProcedure, serverInfo.Connection, _cfg.AlterOrCreate);
